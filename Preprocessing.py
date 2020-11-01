@@ -9,8 +9,8 @@ def mostFrequent(train):
 
 
 def mostFreqTag_Relative(train):
-    pos_counts = nltk.FreqDist(tag for (word, tag) in train)
-    most_freq = pos_counts.most_common(4)[1:4]
+    pos_counts = nltk.util.bigrams(train)
+    most_freq = pos_counts.most_common(5)[1:4]  # Returns the 5 most frequent tags
     pos_counts = dict(pos_counts)
     most_freq = dict(most_freq)
     total_value = sum(pos_counts.values())
@@ -20,7 +20,7 @@ def mostFreqTag_Relative(train):
 
 
 def mostFreq_verb(train):
-    pos_counts = nltk.FreqDist(word for (word, tag) in train if tag == 'VB')
+    pos_counts = nltk.FreqDist(word for (word, tag) in train if tag.startswith("VB"))
     most_freq = pos_counts.most_common(3)
     pos_counts = dict(pos_counts)
     most_freq = dict(most_freq)
