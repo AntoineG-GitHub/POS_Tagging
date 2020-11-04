@@ -9,14 +9,19 @@ def mostFrequent(train):
 
 
 def mostFreqTag_Relative(train):
-    pos_counts = nltk.util.bigrams(train)
-    most_freq = pos_counts.most_common(5)[1:4]  # Returns the 5 most frequent tags
-    pos_counts = dict(pos_counts)
-    most_freq = dict(most_freq)
-    total_value = sum(pos_counts.values())
-    for key in most_freq:
-        most_freq[key] = round(most_freq[key] / total_value, ndigits=3)
-    return most_freq
+    pos_counts = nltk.bigrams(tag for (word, tag) in train)
+    prec = {}
+    for i in list(pos_counts):
+        if i[1] == 'NN':
+            if i[0] in prec:
+                prec[str(i[0])] += 1
+            else:
+                prec[str(i[0])] = 1
+    dic_mostFreq = dict(nltk.FreqDist(prec).most_common(3))
+    most = {}
+    for (key) in dic_mostFreq:
+        most[key] = round(dic_mostFreq[key]/sum(prec.values()), ndigits=2)
+    return most
 
 
 def mostFreq_verb(train):
