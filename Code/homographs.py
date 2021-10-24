@@ -23,3 +23,9 @@ def get_homographs_one_word(corpus, the_word):
     pos_tags = nltk.FreqDist(tag for (word, tag) in corpus if word == the_word)
     pos_tags = set(dict(pos_tags).keys())
     return pos_tags
+
+
+def hmm(corpus):
+    train_sents = corpus.tagged_sents()
+    my_tag = nltk.HiddenMarkovModelTagger.train(train_sents)
+    return my_tag

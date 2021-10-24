@@ -2,6 +2,11 @@ import nltk
 
 
 def mostFrequent(train):
+    """
+    Returns most frequent tags
+    :param train: train data set
+    :return: a dictionary with the most frequent tags
+    """
     pos_counts = nltk.FreqDist(tag for (word, tag) in train)
     pos_counts = pos_counts.most_common(3)
     most_freq_tags = dict(pos_counts)
@@ -9,6 +14,11 @@ def mostFrequent(train):
 
 
 def mostFreqTag_Relative(train):
+    """
+    Returns relative most frequent tags
+    :param train: train data set
+    :return: the most frequent relative tags
+    """
     pos_counts = nltk.bigrams(tag for (word, tag) in train)
     prec = {}
     for i in list(pos_counts):
@@ -25,6 +35,11 @@ def mostFreqTag_Relative(train):
 
 
 def mostFreq_verb(train):
+    """
+    Returns most frequent verbs
+    :param train: train data set
+    :return: the most frequent verbs
+    """
     pos_counts = nltk.FreqDist(word for (word, tag) in train if tag.startswith("VB"))
     most_freq = pos_counts.most_common(3)
     pos_counts = dict(pos_counts)
